@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+    <h3>Agents</h3>
+    <hr>
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>username</th>
+                <th>password</th>
+                <th>firstname</th>
+                <th>lastname</th>
+                <th>salary</th>
+                <th>stationname</th>
+                <th>start</th>
+                <th>end</th>
+                <th>stateid</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="agent : ${agents}" >
+                <td th:text="${ticket.username}"/>
+                <td th:text="${ticket.password}"/>
+                <td th:text="${ticket.firstname}"/>
+                <td th:text="${ticket.lastname}"/>
+                <td th:text="${ticket.salary}"/>
+                <td th:text="${ticket.stationname}"/>
+                <td th:text="${ticket.start}"/>
+                <td th:text="${ticket.end}"/>
+                <td th:text="${ticket.stateid}"/>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <form action="#" th:action="@{/logout}"
+          method="POST">
+
+        <input type="submit" value="Logout" />
+
+    </form>
+
+</body>
+</html>
