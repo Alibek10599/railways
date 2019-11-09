@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent</title>
+</head>
+<body>
+<form action="#" method="POST" th:action="@{/saveAgent}" th:object="${agent}">
+    <input th:field="*{id}" type="hidden"/>
+    <input placeholder="Username" th:field="*{username}" type="text"/>
+    <input placeholder="Password" th:field="*{password}" type="password"/>
+    <input placeholder="First name" th:field="*{firstName}" type="text"/>
+    <input placeholder="Last name" th:field="*{lastName}" type="text"/>
+    <input placeholder="Salary" th:field="*{salary}" type="number"/>
+    <input placeholder="Station name" th:field="*{stationName}" type="text"/>
+    <input placeholder="Start" th:field="*{start}" type="number"/>
+    <input placeholder="End" th:field="*{end}" type="number"/>
+    <input placeholder="State ID" th:field="*{stateId}" type="number"/>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

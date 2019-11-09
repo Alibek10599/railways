@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +41,13 @@ public class DemoController {
 
         User user = new User();
         model.addAttribute("user", user);
-
         return "signup";
     }
 
     @PostMapping("/signup")
     public String saveLogin(@ModelAttribute("user") User user) {
 
-        if (userRepository.findById(user.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             return "redirect:/signup?error";
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -73,19 +71,19 @@ public class DemoController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("PASSENGER"))){
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("PASSENGER"))) {
 
             List<Ticket> tickets = new ArrayList<>();
 
-            for (Passenger passenger: passengerRepository.findAllByUsername(authentication.getName())){
+            for (Passenger passenger : passengerRepository.findAllById(userRepository.findByUsername(authentication.getName()).getId())) {
                 tickets.addAll(ticketRepository.findAllByPassengerId(passenger.getStateId()));
             }
 
             model.addAttribute("tickets", tickets);
             return "userprofile";
-        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("AGENT"))){
+        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("AGENT"))) {
             return "agentprofile";
-        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("MANAGER"))){
+        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("MANAGER"))) {
 
             model.addAttribute("agents", agentRepository.findAll());
 

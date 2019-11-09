@@ -8,5 +8,5 @@ import java.util.List;
 
 @RepositoryRestResource(path = "passenger")
 public interface PassengerRepository extends JpaRepository<Passenger, Integer> {
-    List<Passenger> findAllByUsername(String username);
+    List<Passenger> findAllById(Integer id);
 }

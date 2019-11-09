@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Manager Profile</title>
 </head>
 <body>
 
@@ -13,6 +13,7 @@
 
         <thead>
             <tr>
+                <th>id</th>
                 <th>username</th>
                 <th>password</th>
                 <th>firstname</th>
@@ -27,19 +28,31 @@
 
         <tbody>
             <tr th:each="agent : ${agents}" >
-                <td th:text="${ticket.username}"/>
-                <td th:text="${ticket.password}"/>
-                <td th:text="${ticket.firstname}"/>
-                <td th:text="${ticket.lastname}"/>
-                <td th:text="${ticket.salary}"/>
-                <td th:text="${ticket.stationname}"/>
-                <td th:text="${ticket.start}"/>
-                <td th:text="${ticket.end}"/>
-                <td th:text="${ticket.stateid}"/>
+                <td th:text="${agent.id}"/>
+                <td th:text="${agent.username}"/>
+                <td th:text="${agent.password}"/>
+                <td th:text="${agent.firstName}"/>
+                <td th:text="${agent.lastName}"/>
+                <td th:text="${agent.salary}"/>
+                <td th:text="${agent.stationName}"/>
+                <td th:text="${agent.start}"/>
+                <td th:text="${agent.end}"/>
+                <td th:text="${agent.stateId}"/>
+                <td>
+                    <a th:href="@{/updateAgent(id=${agent.id})}">Update</a>
+                </td>
+                <td>
+                    <a th:href="@{/deleteAgent(id=${agent.id})}">Delete</a>
+                </td>
             </tr>
         </tbody>
 
     </table>
+
+    <a th:href="@{/insertAgent}">Sign up an Agent</a>
+
+    <a th:href="@{/newRoute}">Create a new Route</a>
+
 
     <form action="#" th:action="@{/logout}"
           method="POST">

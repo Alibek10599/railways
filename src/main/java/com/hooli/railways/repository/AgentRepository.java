@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(path = "agent")
-public interface AgentRepository extends JpaRepository<Agent, String> {
+public interface AgentRepository extends JpaRepository<Agent, Integer> {
+    Agent findByUsername(String username);
 
 }

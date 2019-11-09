@@ -24,9 +24,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         CustomUserDetails userDetails = new CustomUserDetails();
 
-        Manager manager = managerRepository.findById(username).orElse(null);
-        Agent agent = agentRepository.findById(username).orElse(null);
-        User user = userRepository.findById(username).orElse(null);
+        Manager manager = managerRepository.findByUsername(username);
+        Agent agent = agentRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
 
         if (manager != null) {
             userDetails.setPerson(new Person(manager.getUsername(), manager.getPassword(), "MANAGER"));

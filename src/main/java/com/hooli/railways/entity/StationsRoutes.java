@@ -19,16 +19,27 @@ public class StationsRoutes {
     private Integer arrival;
     @Column(name="TIME")
     private Integer time;
+    @Column(name = "STATION_NUMBER")
+    private Integer stationNumber;
 
     public StationsRoutes() {
     }
 
-    public StationsRoutes(Integer id, Integer routeId, String stationName, Integer arrival, Integer time) {
+    public StationsRoutes(Integer id, Integer routeId, String stationName, Integer arrival, Integer time, Integer stationNumber) {
         this.id = id;
         this.routeId = routeId;
         this.stationName = stationName;
         this.arrival = arrival;
         this.time = time;
+        this.stationNumber = stationNumber;
+    }
+
+    public Integer getStationNumber() {
+        return stationNumber;
+    }
+
+    public void setStationNumber(Integer stationNumber) {
+        this.stationNumber = stationNumber;
     }
 
     public Integer getRouteId() {

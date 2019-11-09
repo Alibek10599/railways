@@ -1,14 +1,32 @@
 package com.hooli.railways.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "AGENT")
 public class Agent{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Integer id;
+
+    public Agent(Integer id, String username, String password, String firstName, String lastName, Integer salary, String stationName, Integer start, Integer end, Integer stateId) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+        this.stationName = stationName;
+        this.start = start;
+        this.end = end;
+        this.stateId = stateId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
     @Column(name="USERNAME")
     private String username;
     @Column(name="PASSWORD")
@@ -32,16 +50,8 @@ public class Agent{
     public Agent() {
     }
 
-    public Agent(String username, String password, String firstName, String lastName, Integer salary, String stationName, Integer start, Integer end, Integer stateId) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-        this.stationName = stationName;
-        this.start = start;
-        this.end = end;
-        this.stateId = stateId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {

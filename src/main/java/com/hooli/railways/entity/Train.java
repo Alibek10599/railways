@@ -15,4 +15,37 @@ public class Train {
     private Integer departure;
     @Column(name="ROUTE_ID")
     private Integer routeId;
+
+    public Train() {
+    }
+
+    public Train(Integer id, Integer departure, Integer routeId) {
+        this.id = id;
+        this.departure = departure;
+        this.routeId = routeId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(Integer departure) {
+        this.departure = departure;
+    }
+
+    public Integer getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(Integer routeId) {
+        this.routeId = routeId;
+    }
 }

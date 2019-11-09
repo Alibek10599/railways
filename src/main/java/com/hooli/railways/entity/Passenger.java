@@ -19,20 +19,26 @@ public class Passenger{
     private String email;
     @Column(name = "PHONE")
     private String phone;
-    @Column(name = "USERNAME")
-    private String username;
-    public Passenger() {
+    @Column(name = "ID")
+    private Integer id;
 
-    }
-
-    public Passenger(Integer stateId, String firstName, String lastName, String email, String phone, String username) {
+    public Passenger(Integer stateId, String firstName, String lastName, String email, String phone, Integer id) {
         this.stateId = stateId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.username = username;
+        this.id = id;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Passenger() {
+
+    }
+
 
     public Integer getStateId() {
         return stateId;
@@ -74,11 +80,7 @@ public class Passenger{
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

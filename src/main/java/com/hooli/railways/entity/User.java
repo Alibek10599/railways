@@ -1,14 +1,14 @@
 package com.hooli.railways.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Integer id;
     @Column(name="USERNAME")
     private String username;
     @Column(name="PASSWORD")
@@ -20,10 +20,19 @@ public class User {
 
     }
 
-    public User(String username, String password, String email) {
+    public User(String username, String password, String email, Integer id) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
