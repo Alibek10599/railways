@@ -1,8 +1,6 @@
 package com.hooli.railways.controller;
 
-import com.hooli.railways.entity.StationsRoutes;
-import com.hooli.railways.entity.TicketSearch;
-import com.hooli.railways.entity.Train;
+import com.hooli.railways.entity.*;
 import com.hooli.railways.repository.StationsRoutesRepository;
 import com.hooli.railways.repository.TicketRepository;
 import com.hooli.railways.repository.TrainRepository;
@@ -29,26 +27,43 @@ public class SearchController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String showGuestList(Model model, @RequestParam TicketSearch ticketSearch) {
 
-        List<Integer> routes = new ArrayList<>();
-        List<Train> trains = new ArrayList<>();
+        List<RouteFront> routeFronts = new ArrayList<>();
+        List<TrainFront> trainFronts = new ArrayList<>();
         List<StationsRoutes> starts = stationsRoutesRepository.findAllByStationName(ticketSearch.getStart());
         List<StationsRoutes> ends = stationsRoutesRepository.findAllByStationName(ticketSearch.getEnd());
 
         for (StationsRoutes startStationsRoutes : starts) {
             for (StationsRoutes endStationsRoutes : ends) {
                 if (startStationsRoutes.getRouteId().equals(endStationsRoutes.getRouteId()) && startStationsRoutes.getStationNumber() < endStationsRoutes.getStationNumber()) {
-                    routes.add(startStationsRoutes.getId());
-//                    break;
+                    routeFronts.add(new RouteFront(
+                            startStationsRoutes.getRouteId(),
+                            startStationsRoutes.getArrival() + startStationsRoutes.getTime(),
+                            endStationsRoutes.getArrival(),
+                            endStationsRoutes.getPrice() - startStationsRoutes.getPrice(),
+                            startStationsRoutes.getStationNumber(),
+                            endStationsRoutes.getStationNumber(),
+
+                            ));
                 }
             }
         }
-        for (Integer routeId : routes) {
-            for (Train train : trainRepository.findAllByRouteId(routeId)) {
-                if (train.getDeparture() > ticketSearch.getDate() && train.getDeparture() < ticketSearch.getDate() + 24 * 60 * 60 * 60) {
-                    trains.add(train);
+        for (RouteFront routeFront : routeFronts) {
+            for (Train train : trainRepository.findAllByRouteId(routeFront.getId())) {
+                //TODO("we really need to do this from repository: ")
+                if (train.getDeparture() >= ticketSearch.getDate() - routeFront.getDeparture() && train.getDeparture() <= ticketSearch.getDate() - routeFront.getDeparture() + 24 * 60 * 60 * 60) {
+                    trainFronts.add(new TrainFront(
+                            train.getId(),
+                            routeFront.getId(),
+                            train.getDeparture() + routeFront.getDeparture(),
+                            train.getDeparture() + routeFront.getArrival(),
+                            routeFront.getPrice(),
+                            routeFront.getStart(),
+                            routeFront.getEnd()
+                    ));
                 }
             }
         }
+
 
         // TODO("create TicketFront, calculate the price, departure and arrival time");
 

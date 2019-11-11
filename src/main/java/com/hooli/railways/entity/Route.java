@@ -15,8 +15,61 @@ public class Route {
     private String origin;
     @Column(name="DESTINATION")
     private String destionation;
-    @Column(name="NUMBER_OF_TICKETS")
-    private Integer numberOfTickets;
+    @Column(name = "NUMBER_OF_SEATS")
+    private Integer seats;
     @Column(name="STATIONS")
     private Integer stations;
+
+    public Route() {
+
+    }
+
+    public Route(Integer id, String origin, String destionation, Integer seats, Integer stations) {
+        this.id = id;
+        this.origin = origin;
+        this.destionation = destionation;
+        this.seats = seats;
+        this.stations = stations;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestionation() {
+        return destionation;
+    }
+
+    public void setDestionation(String destionation) {
+        this.destionation = destionation;
+    }
+
+    public Integer getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    public Integer getStations() {
+        return stations;
+    }
+
+    public void setStations(Integer stations) {
+        this.stations = stations;
+    }
 }
+
