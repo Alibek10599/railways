@@ -9,4 +9,6 @@ import java.util.List;
 @RepositoryRestResource(path = "ticket")
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
     List<Ticket> findAllByPassengerId(Integer stateId);
+
+    List<Ticket> findAllByTrainId(Integer trainId);
 }

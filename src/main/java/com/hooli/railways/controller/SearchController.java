@@ -7,9 +7,9 @@ import com.hooli.railways.repository.TrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class SearchController {
     StationsRoutesRepository stationsRoutesRepository;
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String showGuestList(Model model, @RequestParam TicketSearch ticketSearch) {
+    public String showGuestList(Model model, @ModelAttribute("user") TicketSearch ticketSearch) {
 
         List<RouteFront> routeFronts = new ArrayList<>();
         List<TrainFront> trainFronts = new ArrayList<>();
@@ -41,9 +41,8 @@ public class SearchController {
                             endStationsRoutes.getArrival(),
                             endStationsRoutes.getPrice() - startStationsRoutes.getPrice(),
                             startStationsRoutes.getStationNumber(),
-                            endStationsRoutes.getStationNumber(),
-
-                            ));
+                            endStationsRoutes.getStationNumber()
+                    ));
                 }
             }
         }
@@ -58,17 +57,22 @@ public class SearchController {
                             train.getDeparture() + routeFront.getArrival(),
                             routeFront.getPrice(),
                             routeFront.getStart(),
-                            routeFront.getEnd()
+                            routeFront.getEnd(),
+                            train.getSeats()
                     ));
                 }
             }
         }
 
+        for (TrainFront trainFront : trainFronts) {
+            for (Ticket ticket : ticketRepository.findAllByTrainId(trainFront.getId())) {
+                if (ticket.getEnd() > trainFront.getStart() && ticket.getStart() < trainFront.getEnd()) {
+                    trainFront.setSeatFalse(ticket.getSeat());
+                }
+            }
+        }
 
-        // TODO("create TicketFront, calculate the price, departure and arrival time");
-
-
-        model.addAttribute("trains", trains);
-        return "results :: resultsList";
+        model.addAttribute("trains", trainFronts);
+        return "";
     }
 }

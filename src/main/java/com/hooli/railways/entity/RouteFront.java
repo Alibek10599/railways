@@ -5,29 +5,19 @@ public class RouteFront {
     private Integer departure;
     private Integer arrival;
     private Integer price;
-    private Integer seats;
     private Integer start;
     private Integer end;
 
-    public RouteFront(Integer id, Integer departure, Integer arrival, Integer price, Integer start, Integer end, Integer seats) {
+    public RouteFront(Integer id, Integer departure, Integer arrival, Integer price, Integer start, Integer end) {
         this.id = id;
         this.departure = departure;
         this.arrival = arrival;
         this.price = price;
         this.start = start;
         this.end = end;
-        this.seats = seats;
     }
 
     public RouteFront() {
-    }
-
-    public Integer getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Integer seats) {
-        this.seats = seats;
     }
 
     public Integer getStart() {

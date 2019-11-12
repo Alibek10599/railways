@@ -36,8 +36,8 @@ public class TrainFront {
         this.seats = seats;
     }
 
-    public void setSeat(Boolean bool, Integer seat) {
-        this.seats[seat] = bool;
+    public void setSeatFalse(Integer seat) {
+        this.seats[seat] = false;
     }
 
     public Boolean getSeat(int seat) {

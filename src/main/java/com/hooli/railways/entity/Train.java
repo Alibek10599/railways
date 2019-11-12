@@ -15,14 +15,26 @@ public class Train {
     private Integer departure;
     @Column(name="ROUTE_ID")
     private Integer routeId;
+    @Column(name = "NUMBER_OF_SEATS")
+    private Integer seats;
 
     public Train() {
     }
 
-    public Train(Integer id, Integer departure, Integer routeId) {
+    public Train(Integer id, Integer departure, Integer routeId, Integer seats) {
+        this.seats = seats;
         this.id = id;
         this.departure = departure;
         this.routeId = routeId;
+    }
+
+
+    public Integer getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Integer seats) {
+        this.seats = seats;
     }
 
     public Integer getId() {

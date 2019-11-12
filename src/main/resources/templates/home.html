@@ -7,5 +7,39 @@
 <body>
     <a th:href="@{/signup}">Sign up</a>
     <a th:href="@{/profile}">Profile</a>
+
+    <div id="search_results">
+
+    </div>
+
+    <button id="search" type="button">Search</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //call function when page is loaded
+            getContent();
+
+            //set on change listener
+            $('#selection').change(getContent);
+
+            function getContent() {
+
+                //create url to request fragment
+                var url = /content/;
+                if ($('#selection').val() === "Content 1") {
+                    url = url + "content1";
+                } else {
+                    url = url + "content2";
+                }
+
+                //load fragment and replace content
+                $('#replace_div').load(url);
+            }
+        })
+    </script>
+
 </body>
 </html>
